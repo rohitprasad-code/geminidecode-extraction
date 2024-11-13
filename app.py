@@ -85,11 +85,14 @@ def main() -> None:
     The main function for the Streamlit app that allows users to upload images, provide input text, and receive
     analysis from the Gemini model. Displays uploaded images and outputs analysis results.
     
-    Args: None
-    Returns: None
+    Args:
+        None
+    
+    Returns:
+        None
     """
     st.title("Gemini Multi-language Document Extraction")
-    
+
     # File uploader for multiple image files
     uploaded_files = st.file_uploader("Upload your images for analysis ~", type=["png", "jpg", "jpeg"], accept_multiple_files=True)
 
@@ -115,18 +118,17 @@ def main() -> None:
         # Get user input text
         text = st.text_input("Input: ", key="input")
 
-        submit = st.button("Tell me about the images")
+        submit = st.button("Tell me")
 
         if submit:
-            if images:
+            if text or images:
                 # Call the Gemini Pro model to analyze the uploaded images
-                st.write("Analysis Results:")
+                st.write("Results:~")
                 get_gemini_response(images, text)
             else:
-                st.error("Please provide both input text and upload at least one image.")
+                st.error("Please Upload at least one image.")
     else:
         st.write("Please upload image files to proceed.")
-    
     
 if __name__ == '__main__':
     main()
